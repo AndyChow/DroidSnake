@@ -134,6 +134,8 @@ public class SnakeView extends TileView {
 	class SnakeViewThread implements Runnable {
 
 		public void run() {
+			//we should sleep before the game start
+			//应该睡眠一段时间，不然的话，程序开启时会出问题
 			try {
 				Thread.sleep(1000);
 			}
