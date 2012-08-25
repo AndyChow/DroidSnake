@@ -25,7 +25,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zyqhi.android.snake" >
 
-    <application android:icon="@drawable/saye" android:label="Snake on a Phone" >
+    <application
+        android:icon="@drawable/saye"
+        android:label="Snake on a Phone" >
+          <activity
+            android:name=".Snake"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainSnake"
             android:label="@string/title_activity_main_snake" >
@@ -35,18 +47,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+       
         <activity
-            android:name="Snake"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:name=".Snake1"
+            android:label="@string/title_activity_snake1" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                
             </intent-filter>
         </activity>
-        
     </application>
 
 </manifest>

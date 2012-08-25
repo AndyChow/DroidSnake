@@ -38,10 +38,12 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_main_snake=0x7f030000;
-        public static final int snake_layout=0x7f030001;
+        public static final int activity_snake=0x7f030001;
+        public static final int snake_layout=0x7f030002;
     }
     public static final class menu {
         public static final int activity_main_snake=0x7f060000;
+        public static final int activity_snake=0x7f060001;
     }
     public static final class string {
         public static final int hello_world=0x7f050005;
@@ -53,6 +55,7 @@ containing a value of this type.
         public static final int mode_ready=0x7f050000;
         public static final int snake_layout_text_text=0x7f050004;
         public static final int title_activity_main_snake=0x7f050007;
+        public static final int title_activity_snake1=0x7f050009;
     }
     public static final class styleable {
         /** Attributes that can be used with a TileView.

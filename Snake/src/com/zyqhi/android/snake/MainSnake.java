@@ -20,7 +20,7 @@ public class MainSnake extends Activity {
     	mBtnStartGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-            	Intent intent = new Intent(MainSnake.this, Snake.class);
+            	Intent intent = new Intent(MainSnake.this, com.zyqhi.android.snake.Snake.class);
                 startActivity(intent);
             }
         });
