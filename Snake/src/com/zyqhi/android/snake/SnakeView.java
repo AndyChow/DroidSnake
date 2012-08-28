@@ -88,10 +88,13 @@ public class SnakeView extends TileView {
 
 	/**
 	 * mSnakeTrail: a list of Coordinates that make up the snake's body
-	 * mAppleList: the secret location of the juicy apples the snake craves.
+	 * mAppleList: the secret location of the juicy apples the snake craves
+	 * mGodFruit: a fruit falling from top screen, like in Russian square
 	 */
 	private ArrayList<Coordinate> mSnakeTrail = new ArrayList<Coordinate>();
 	private ArrayList<Coordinate> mAppleList = new ArrayList<Coordinate>();
+	private ArrayList<Coordinate> mGodFruit = new ArrayList<Coordinate>();
+	private ArrayList<Coordinate> mFruitOnGround = new ArrayList<Coordinate>();
 
 	/**
 	 * Everyone needs a little randomness in their life
@@ -187,6 +190,9 @@ public class SnakeView extends TileView {
 	private void initNewGame() {
 		mSnakeTrail.clear();
 		mAppleList.clear();
+		mFruitOnGround.clear();
+		mGodFruit.clear();
+		mOnGround = false;
 
 		// For now we're just going to load up a short default eastbound snake
 		// that's just turned north
@@ -197,6 +203,13 @@ public class SnakeView extends TileView {
 		mSnakeTrail.add(new Coordinate(4, 7));
 		mSnakeTrail.add(new Coordinate(3, 7));
 		mSnakeTrail.add(new Coordinate(2, 7));
+
+		// fruit from God
+		mGodFruit.add(new Coordinate(6, 1));
+		mGodFruit.add(new Coordinate(7, 1));
+		mGodFruit.add(new Coordinate(6, 2));
+		mGodFruit.add(new Coordinate(7, 2));
+
 		mNextDirection = NORTH;
 
 		// Two apples to start with
@@ -507,6 +520,22 @@ public class SnakeView extends TileView {
 	}
 
 	/**
+	 * Selects a random location in the top of garden
+	 */
+	private void addRandomFruit() {
+		int loca;
+
+		loca = RNG.nextInt(mXTileCount - 4) + 1;
+
+		mGodFruit.add(new Coordinate(loca, 1));
+		mGodFruit.add(new Coordinate(loca + 1, 1));
+		mGodFruit.add(new Coordinate(loca, 2));
+		mGodFruit.add(new Coordinate(loca + 1, 2));
+
+		mOnGround = false;
+	}
+
+	/**
 	 * Handles the basic update loop, checking to see if we are in the running
 	 * state, determining if a move should be made, updating the snake's
 	 * location.
@@ -522,6 +551,8 @@ public class SnakeView extends TileView {
 				updateWalls();
 				updateSnake();
 				updateApples();
+				updateFruit();
+				updateGround();
 				mLastMove = now;
 			}
 			mRedrawHandler.sleep(mMoveDelay);
@@ -539,12 +570,25 @@ public class SnakeView extends TileView {
 	 */
 	private void updateWalls() {
 		for (int x = 0; x < mXTileCount; x++) {
+			// Colorful wall
+			/*
+			 * setTile(RNG.nextInt(3)+1, x, 0); setTile(RNG.nextInt(3)+1, x,
+			 * mYTileCount - 1);
+			 */
+
 			setTile(RED_STAR, x, 0);
 			setTile(RED_STAR, x, mYTileCount - 1);
+
 		}
 		for (int y = 1; y < mYTileCount - 1; y++) {
+			/*
+			 * setTile(RNG.nextInt(3)+1, 0, y); setTile(RNG.nextInt(3)+1,
+			 * mXTileCount - 1, y);
+			 */
+
 			setTile(GREEN_STAR, 0, y);
 			setTile(GREEN_STAR, mXTileCount - 1, y);
+
 		}
 	}
 
@@ -567,6 +611,7 @@ public class SnakeView extends TileView {
 	 */
 	private void updateSnake() {
 		boolean growSnake = false;
+		boolean shortSnake = false;
 
 		// grab the snake by the head
 		Coordinate head = mSnakeTrail.get(0);
@@ -627,11 +672,60 @@ public class SnakeView extends TileView {
 			}
 		}
 
+		// Look for fruit
+		int fruitcount = mGodFruit.size();
+
+		if (fruitcount == 0) {
+			// the fruit was ate up by the snake
+			addRandomFruit();
+		}
+		else {
+
+			for (int appleindex = 0; appleindex < fruitcount; appleindex++) {
+				Coordinate c = mGodFruit.get(appleindex);
+				if (c.equals(newHead)) {
+
+					mScore += 2;
+					growSnake = true;
+					mGodFruit.remove(c);
+					break;
+				}
+			}
+		}
+
+		// Look for fruit on ground, which will decrease you body length
+		fruitcount = mFruitOnGround.size();
+
+		for (int appleindex = 0; appleindex < fruitcount; appleindex++) {
+			Coordinate c = mFruitOnGround.get(appleindex);
+			if (c.equals(newHead)) {
+
+				// mScore += 2;
+				// growSnake = true;
+				mFruitOnGround.remove(c);
+				shortSnake = true;
+				break;
+			}
+		}
+
 		// push a new head onto the ArrayList and pull off the tail
 		mSnakeTrail.add(0, newHead);
 		// except if we want the snake to grow
 		if (!growSnake) {
 			mSnakeTrail.remove(mSnakeTrail.size() - 1);
+		}
+
+		// make the body short
+		if (mSnakeTrail.size() > 2) {
+			if (shortSnake) {
+				mSnakeTrail.remove(mSnakeTrail.size() - 1);
+			}
+			mStatusText.setVisibility(View.INVISIBLE);
+		}
+		else {
+			mStatusText
+					.setText("Greedy Snake!\nGod dosen't like Snakes eating ground apples!");
+			mStatusText.setVisibility(View.VISIBLE);
 		}
 
 		int index = 0;
@@ -644,7 +738,68 @@ public class SnakeView extends TileView {
 			}
 			index++;
 		}
+	}
 
+	/**
+	 * An fruit from the God fall in to the screen.
+	 */
+	// private int fruitIndex;
+	// low the falling speed of fruit
+	private boolean mLowSpeed = false;
+	// fruit is on the ground now, it should no longer falling
+	private boolean mOnGround = false;
+
+	private void updateFruit() {
+		//fruit has reached ground
+		for (Coordinate c : mGodFruit) {
+			// setTile(RED_STAR, c.x, c.y);
+			if (c.y == mYTileCount - 2)
+				mOnGround = true;
+		}
+		//fruit hasn't reached ground, but there is other fruit under it
+		for (Coordinate c1 : mGodFruit) {
+			Coordinate temp = new Coordinate(c1.x, c1.y+1);
+			for (Coordinate c2 : mFruitOnGround) {
+				if (temp.equals(c2)) {
+					mOnGround = true;
+				}
+			}
+		}
+
+		if (mOnGround) {
+			for (Coordinate c : mGodFruit)
+				mFruitOnGround.add(c);
+			mGodFruit.clear();
+			// TODO: Add another fruit
+			addRandomFruit();
+			return;
+		}
+
+		if (mLowSpeed) {
+			mLowSpeed = false;
+
+			for (Coordinate c : mGodFruit) {
+				setTile(RED_STAR, c.x, c.y);
+			}
+		}
+		else {
+			mLowSpeed = true;
+			for (Coordinate c : mGodFruit) {
+				setTile(RED_STAR, c.x, c.y);
+
+				if (mOnGround != true)
+					++c.y;
+			}
+		}
+	}
+
+	/**
+	 * After the fruit fall down to the ground, it will make a ground
+	 */
+	private void updateGround() {
+		for (Coordinate c : mFruitOnGround) {
+			setTile(GREEN_STAR, c.x, c.y);
+		}
 	}
 
 	/**
