@@ -3,14 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/start_game"
+    <LinearLayout
+        android:id="@+id/main_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="false"
-        android:layout_marginTop="46dp"
-        android:text="@string/main_start_game" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="34dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/start_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/main_start_game" />
+
+        <Button
+            android:id="@+id/game_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="55dp"
+            android:text="@string/main_game_setting" />
+
+    </LinearLayout>
 
 </RelativeLayout>

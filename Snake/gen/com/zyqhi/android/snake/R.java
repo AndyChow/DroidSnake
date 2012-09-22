@@ -8,6 +8,9 @@
 package com.zyqhi.android.snake;
 
 public final class R {
+    public static final class array {
+        public static final int settings_array=0x7f060000;
+    }
     public static final class attr {
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -31,22 +34,28 @@ containing a value of this type.
         public static final int yellowstar=0x7f020004;
     }
     public static final class id {
-        public static final int menu_settings=0x7f070003;
-        public static final int snake=0x7f070001;
-        public static final int start_game=0x7f070000;
-        public static final int text=0x7f070002;
+        public static final int dialogButtonOK=0x7f080004;
+        public static final int dlg_text=0x7f080003;
+        public static final int game_setting=0x7f080002;
+        public static final int main_linear_layout=0x7f080000;
+        public static final int menu_settings=0x7f080007;
+        public static final int snake=0x7f080005;
+        public static final int start_game=0x7f080001;
+        public static final int text=0x7f080006;
     }
     public static final class layout {
         public static final int activity_main_snake=0x7f030000;
-        public static final int activity_snake=0x7f030001;
-        public static final int snake_layout=0x7f030002;
+        public static final int dlg_speed_setting=0x7f030001;
+        public static final int game_setting=0x7f030002;
+        public static final int snake_layout=0x7f030003;
     }
     public static final class menu {
-        public static final int activity_main_snake=0x7f060000;
-        public static final int activity_snake=0x7f060001;
+        public static final int activity_main_snake=0x7f070000;
+        public static final int activity_snake=0x7f070001;
     }
     public static final class string {
         public static final int hello_world=0x7f050005;
+        public static final int main_game_setting=0x7f050009;
         public static final int main_start_game=0x7f050008;
         public static final int menu_settings=0x7f050006;
         public static final int mode_lose_prefix=0x7f050002;
@@ -55,7 +64,7 @@ containing a value of this type.
         public static final int mode_ready=0x7f050000;
         public static final int snake_layout_text_text=0x7f050004;
         public static final int title_activity_main_snake=0x7f050007;
-        public static final int title_activity_snake1=0x7f050009;
+        public static final int title_activity_snake1=0x7f05000a;
     }
     public static final class styleable {
         /** Attributes that can be used with a TileView.

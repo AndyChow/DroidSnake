@@ -48,6 +48,8 @@ public class Snake extends Activity {
 
         mSnakeView = (SnakeView) findViewById(R.id.snake);
         mSnakeView.setTextView((TextView) findViewById(R.id.text));
+        // Set the move speed of snake
+        mSnakeView.setMoveDelay(GameSetting.MoveDelay);
 
         if (savedInstanceState == null) {
             // We were just launched -- set up a new game

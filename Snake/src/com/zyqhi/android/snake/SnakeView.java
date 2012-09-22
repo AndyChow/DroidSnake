@@ -218,7 +218,7 @@ public class SnakeView extends TileView {
 		addRandomApple();
 		addRandomApple();
 
-		mMoveDelay = 420;
+//		mMoveDelay = 420;
 		mScore = 0;
 	}
 
@@ -450,6 +450,15 @@ public class SnakeView extends TileView {
 	public void setTextView(TextView newView) {
 		mStatusText = newView;
 	}
+	
+	/**
+	 * Sets the MoveDelay that will be used to change the speed of snake
+	 * 
+	 * @param mMoveDelay
+	 */
+	public void setMoveDelay(int delay) {
+		mMoveDelay = delay;
+	}
 
 	/**
 	 * Updates the current mode of the application (RUNNING or PAUSED or the
@@ -666,7 +675,7 @@ public class SnakeView extends TileView {
 				addRandomApple();
 
 				mScore++;
-				mMoveDelay *= 0.9;
+				//mMoveDelay *= 0.9;
 
 				growSnake = true;
 			}

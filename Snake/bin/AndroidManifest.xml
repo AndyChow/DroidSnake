@@ -27,7 +27,7 @@
 
     <application
         android:icon="@drawable/saye"
-        android:label="Snake on a Phone" >
+        android:label="CrazySnake" >    
           <activity
             android:name=".Snake"
             android:configChanges="keyboardHidden|orientation"
@@ -35,7 +35,6 @@
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -49,7 +48,7 @@
         </activity>
        
         <activity
-            android:name=".Snake1"
+            android:name=".GameSetting"
             android:label="@string/title_activity_snake1" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,5 +56,6 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-sdk android:minSdkVersion="8"/>
 
 </manifest>
