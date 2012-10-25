@@ -4,3 +4,5 @@ Description :
 This is a simple project aiming to learn android development, and it's based on the Snake game project provided in android sdk. 
 But I think the orginal game is too simple, so I want to add something different to make the game more attractive. One night in my dream, I dreamed of a snake which was surrounded by Russian Square. Our cute snake was frightened, and I made promise to it that I would help it to break the square.
 And then, our advanture started...  
+
+AmbilWarna is a third party library, and you can find it by refer the following url: http://code.google.com/p/android-color-picker/
