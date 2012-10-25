@@ -30,10 +30,11 @@
     <string name="title_activity_snake1">Snake</string>
     
     <string-array name="settings_array">
-        <item>Mercury</item>
-        <item>Venus</item>
+        <item>Movement Speed</item>
+        <item>Background Color</item>
         <item>Earth</item>
         <item>Mars</item>
     </string-array>
+    <string name="move_speed">Move Speed:</string>
 
 </resources>

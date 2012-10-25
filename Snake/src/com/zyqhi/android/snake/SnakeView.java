@@ -21,6 +21,7 @@ import java.util.Random;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -211,14 +212,18 @@ public class SnakeView extends TileView {
 		mGodFruit.add(new Coordinate(7, 2));
 
 		mNextDirection = NORTH;
+		
 
 		// Two apples to start with
 		// Three apples
 		addRandomApple();
 		addRandomApple();
 		addRandomApple();
+		
+		// Set the background color
+		setBackgroundColor(GameSetting.BackgroundColor);
 
-//		mMoveDelay = 420;
+		mMoveDelay = GameSetting.MoveDelay;
 		mScore = 0;
 	}
 

@@ -7,17 +7,17 @@
         android:id="@+id/dlg_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="hello"
+        android:text="@string/move_speed"
         android:textColor="#FFF" 
         />
- 
-     <Button
-        android:id="@+id/dialogButtonOK"
-        android:layout_width="100px"
+    <SeekBar
+    	android:id="@+id/dlg_seekbar"
+    	android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text=" Ok "
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        />
+        android:layout_below="@id/dlg_text"
+        android:max="600"
+        android:progress="5"
+    	/>
+ 
  
 </RelativeLayout>
