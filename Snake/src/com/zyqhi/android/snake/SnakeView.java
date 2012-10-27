@@ -98,6 +98,11 @@ public class SnakeView extends TileView {
 	private ArrayList<Coordinate> mFruitOnGround = new ArrayList<Coordinate>();
 
 	/**
+	 * A factory producing squares
+	 */
+	private TetrisFactory mTetriFactory = new TetrisFactory();
+
+	/**
 	 * Everyone needs a little randomness in their life
 	 */
 	private static final Random RNG = new Random();
@@ -206,20 +211,26 @@ public class SnakeView extends TileView {
 		mSnakeTrail.add(new Coordinate(2, 7));
 
 		// fruit from God
+		int loca = RNG.nextInt(mXTileCount - 3) + 1 ;
+		mGodFruit = mTetriFactory.getTetris();
+
+		for (Coordinate c : mGodFruit)
+			c.x += loca;
+
+		/*
 		mGodFruit.add(new Coordinate(6, 1));
 		mGodFruit.add(new Coordinate(7, 1));
 		mGodFruit.add(new Coordinate(6, 2));
 		mGodFruit.add(new Coordinate(7, 2));
-
+		*/
 		mNextDirection = NORTH;
-		
 
 		// Two apples to start with
 		// Three apples
 		addRandomApple();
 		addRandomApple();
 		addRandomApple();
-		
+
 		// Set the background color
 		setBackgroundColor(GameSetting.BackgroundColor);
 
@@ -455,7 +466,7 @@ public class SnakeView extends TileView {
 	public void setTextView(TextView newView) {
 		mStatusText = newView;
 	}
-	
+
 	/**
 	 * Sets the MoveDelay that will be used to change the speed of snake
 	 * 
@@ -541,10 +552,17 @@ public class SnakeView extends TileView {
 
 		loca = RNG.nextInt(mXTileCount - 4) + 1;
 
-		mGodFruit.add(new Coordinate(loca, 1));
-		mGodFruit.add(new Coordinate(loca + 1, 1));
-		mGodFruit.add(new Coordinate(loca, 2));
-		mGodFruit.add(new Coordinate(loca + 1, 2));
+		mGodFruit = mTetriFactory.getTetris();
+
+		for (Coordinate c : mGodFruit) {
+			c.x = c.x + loca;
+		}
+
+		/*
+		 * mGodFruit.add(new Coordinate(loca, 1)); mGodFruit.add(new
+		 * Coordinate(loca + 1, 1)); mGodFruit.add(new Coordinate(loca, 2));
+		 * mGodFruit.add(new Coordinate(loca + 1, 2));
+		 */
 
 		mOnGround = false;
 	}
@@ -680,7 +698,7 @@ public class SnakeView extends TileView {
 				addRandomApple();
 
 				mScore++;
-				//mMoveDelay *= 0.9;
+				// mMoveDelay *= 0.9;
 
 				growSnake = true;
 			}
@@ -764,15 +782,15 @@ public class SnakeView extends TileView {
 	private boolean mOnGround = false;
 
 	private void updateFruit() {
-		//fruit has reached ground
+		// fruit has reached ground
 		for (Coordinate c : mGodFruit) {
 			// setTile(RED_STAR, c.x, c.y);
 			if (c.y == mYTileCount - 2)
 				mOnGround = true;
 		}
-		//fruit hasn't reached ground, but there is other fruit under it
+		// fruit hasn't reached ground, but there is other fruit under it
 		for (Coordinate c1 : mGodFruit) {
-			Coordinate temp = new Coordinate(c1.x, c1.y+1);
+			Coordinate temp = new Coordinate(c1.x, c1.y + 1);
 			for (Coordinate c2 : mFruitOnGround) {
 				if (temp.equals(c2)) {
 					mOnGround = true;
@@ -841,6 +859,90 @@ public class SnakeView extends TileView {
 		@Override
 		public String toString() {
 			return "Coordinate: [" + x + "," + y + "]";
+		}
+	}
+
+	/**
+	 * Class as a factory to produce a random square.
+	 */
+	private class TetrisFactory {
+		public static final int TETRIS_O = 0;
+		public static final int TETRIS_I = 1;
+		public static final int TETRIS_Z = 2;
+		public static final int TETRIS_J = 3;
+		public static final int TETRIS_L = 4;
+		public static final int TETRIS_T = 5;
+		public static final int TETRIS_S = 6;
+
+		private ArrayList<Coordinate> mSquare = new ArrayList<Coordinate>();
+
+		public ArrayList<Coordinate> getTetris() {
+			int randSquare = RNG.nextInt(7);
+			createTetris(randSquare);
+
+			return mSquare;
+		}
+
+		private void createTetris(int randSquare) {
+			switch (randSquare) {
+			case TETRIS_O: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 0));
+				mSquare.add(new Coordinate(0, 1));
+				mSquare.add(new Coordinate(1, 0));
+				mSquare.add(new Coordinate(1, 1));
+				break;
+			}
+			case TETRIS_I: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 0));
+				mSquare.add(new Coordinate(0, 1));
+				mSquare.add(new Coordinate(0, 2));
+				mSquare.add(new Coordinate(0, 3));
+				break;
+			}
+			case TETRIS_Z: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 0));
+				mSquare.add(new Coordinate(0, 1));
+				mSquare.add(new Coordinate(1, 1));
+				mSquare.add(new Coordinate(1, 2));
+				break;
+			}
+			case TETRIS_J: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 2));
+				mSquare.add(new Coordinate(1, 0));
+				mSquare.add(new Coordinate(1, 1));
+				mSquare.add(new Coordinate(1, 2));
+				break;
+			}
+			case TETRIS_L: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 0));
+				mSquare.add(new Coordinate(1, 0));
+				mSquare.add(new Coordinate(1, 1));
+				mSquare.add(new Coordinate(1, 2));
+				break;
+			}
+			case TETRIS_T: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 1));
+				mSquare.add(new Coordinate(1, 0));
+				mSquare.add(new Coordinate(1, 1));
+				mSquare.add(new Coordinate(1, 2));
+				break;
+			}
+			case TETRIS_S: {
+				mSquare.clear();
+				mSquare.add(new Coordinate(0, 1));
+				mSquare.add(new Coordinate(0, 2));
+				mSquare.add(new Coordinate(1, 0));
+				mSquare.add(new Coordinate(1, 1));
+				break;
+			}
+			default:
+			}
 		}
 	}
 

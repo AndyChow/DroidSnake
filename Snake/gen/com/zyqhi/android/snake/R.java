@@ -36,11 +36,12 @@ containing a value of this type.
         public static final int ambilwarna_cursor=0x7f020002;
         public static final int ambilwarna_hue=0x7f020003;
         public static final int ambilwarna_target=0x7f020004;
-        public static final int greenstar=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int redstar=0x7f020007;
-        public static final int saye=0x7f020008;
-        public static final int yellowstar=0x7f020009;
+        public static final int bg_main=0x7f020005;
+        public static final int greenstar=0x7f020006;
+        public static final int ic_action_search=0x7f020007;
+        public static final int redstar=0x7f020008;
+        public static final int saye=0x7f020009;
+        public static final int yellowstar=0x7f02000a;
     }
     public static final class id {
         public static final int ambilwarna_cursor=0x7f080006;
@@ -63,15 +64,17 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main_snake=0x7f030000;
         public static final int ambilwarna_dialog=0x7f030001;
-        public static final int dlg_speed_setting=0x7f030002;
-        public static final int game_setting=0x7f030003;
-        public static final int snake_layout=0x7f030004;
+        public static final int dlg_about=0x7f030002;
+        public static final int dlg_speed_setting=0x7f030003;
+        public static final int game_setting=0x7f030004;
+        public static final int snake_layout=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main_snake=0x7f070000;
         public static final int activity_snake=0x7f070001;
     }
     public static final class string {
+        public static final int about=0x7f05000b;
         public static final int hello_world=0x7f050005;
         public static final int main_game_setting=0x7f050009;
         public static final int main_start_game=0x7f050008;
@@ -80,7 +83,7 @@ containing a value of this type.
         public static final int mode_lose_suffix=0x7f050003;
         public static final int mode_pause=0x7f050001;
         public static final int mode_ready=0x7f050000;
-        public static final int move_speed=0x7f05000b;
+        public static final int move_speed=0x7f05000c;
         public static final int snake_layout_text_text=0x7f050004;
         public static final int title_activity_main_snake=0x7f050007;
         public static final int title_activity_snake1=0x7f05000a;

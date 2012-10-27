@@ -29,11 +29,12 @@
     <string name="main_game_setting">GameSetting</string>
     <string name="title_activity_snake1">Snake</string>
     
+    <string name="about">Author:\tYuqangZhou \nEmail:\twork.zyqhi@gmail.com \nDate:\t10/26/2012 \nURL:\thttps://github.com/AndyChow/DroidSnake</string>
+    
     <string-array name="settings_array">
         <item>Movement Speed</item>
         <item>Background Color</item>
-        <item>Earth</item>
-        <item>Mars</item>
+        <item>About</item>
     </string-array>
     <string name="move_speed">Move Speed:</string>
 
